@@ -3,7 +3,7 @@ function deleteGrid() {
 }
 
 function promptForReset() {
-    let input = prompt("How large should the grid be? Enter a number between 1-80:");
+    let input = prompt("How large should the grid be? Enter a number between 1-80:", 16);
 
     if (input == null) {
         msg.textContent = "Reset was cancelled.";
@@ -16,8 +16,40 @@ function promptForReset() {
     }
 }
 
+function randRGB() {
+    let r = Math.floor(Math.random() * Math.floor(256));
+    let g = Math.floor(Math.random() * Math.floor(256));
+    let b = Math.floor(Math.random() * Math.floor(256));
+    return `rgb(${r},${g},${b})`;
+}
+
+function decreaseLightness(color) {
+    let colors = color.substr(4, color.length - 5).split(", ");
+
+    if (colors[0] == colors[1] && colors[0] == colors[2]) {
+        num = Math.floor(100 * (colors[0] / 255));
+        if (num % 10 === 0) {
+            return `hsl(0,0%,${num - 10}%)`
+        }
+    }
+
+    return "hsl(0,0%,90%)";
+}
+
 function colorCell(e) {
-    this.classList.add("colored");
+    switch (currentMode) {
+        case ("regular"):
+            this.style.backgroundColor = "black";
+            break;
+        case("party"):
+            this.style.backgroundColor = randRGB();
+            break;
+        case("fade"):
+            if (this.style.backgroundColor == "rgb(0, 0, 0)") return;
+
+            this.style.backgroundColor = decreaseLightness(this.style.backgroundColor);
+            break;
+    }
 }
 
 function createGrid(gridSize) {
@@ -31,6 +63,19 @@ function createGrid(gridSize) {
     gridItems = document.querySelectorAll(".grid-item");
     gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", colorCell));
 }
+
+function setMode(e) {
+    if (currentMode == this.getAttribute("id")) return;
+
+    document.getElementById(currentMode).classList.replace("active", "inactive");
+
+    currentMode = this.getAttribute("id");
+    this.classList.replace("inactive", "active");
+}
+
+let currentMode = "regular";
+const modes = document.querySelectorAll(".mode");
+modes.forEach(mode => mode.addEventListener("click", setMode));
 
 const container = document.getElementById("container1");
 const gridItem = document.createElement("div");

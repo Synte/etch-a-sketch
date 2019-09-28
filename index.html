@@ -3,11 +3,18 @@
     <head>
         <title>Etch-a-Sketch</title>
         <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="grid grid-container" id="container1"></div><br>
-        <p id="msg">Click the below button to reset the grid.</p><br>
+        <h1>Etch-a-Sketch</h1>
+        <ul>
+            <li><a href="#" class="mode active" id="regular">Regular</a></li>
+            <li><a href="#" class="mode inactive" id="party">Party</a></li>
+            <li><a href="#" class="mode inactive" id="fade">Fade</a></li>
+        </ul>
+        <div class="grid grid-container" id="container1"></div>
         <button type="button" onclick="promptForReset()">Reset</button>
+        <p id="msg">Click the reset button to clear the grid.</p>
     </body>
     <script src="script.js"></script>
 </html>
