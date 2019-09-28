@@ -17,12 +17,13 @@ li {
     display: inline;
     padding: 5px;
     margin: 0 5px;
-    font-size: 1.3em;
 }
 
 a {
     padding: 5px;
     text-decoration-line: none;
+    font-family: 'Short Stack', cursive;
+    font-size: 1.5em;
 }
 
 .active {
@@ -60,4 +61,9 @@ h1 {
     font-family: 'Rock Salt', cursive;
     font-size: 3em;
     text-shadow: 2px 2px 8px beige;
+}
+
+#msg {
+    font-size: 1.2em;
+    font-family: 'Indie Flower', cursive;
 }
